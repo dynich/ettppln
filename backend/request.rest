@@ -1,0 +1,422 @@
+#user login
+POST http://ettp.plnindonesiapower.co.id:5000/login
+Content-Type: application/json
+
+{
+  "email": "andi.arsyad@plnindonesiapower.co.id",
+  "password": "andiarsyad"
+}
+
+###
+#user login
+POST http://ettp.plnindonesiapower.co.id:5000/login
+Content-Type: application/json
+
+{
+  "email": "hariady.aji@plnindonesiapower.co.id",
+  "password": "hariadyba"
+}
+
+###
+#user login
+POST http://ettp.plnindonesiapower.co.id:5000/login
+Content-Type: application/json
+
+{
+  "email": "ibnu.khisam@plnindonesiapower.co.id",
+  "password": "ibnukhisam"
+}
+
+###
+
+#admin login
+POST http://ettp.plnindonesiapower.co.id:5000/login
+Content-Type: application/json
+
+{
+  "email": "zidirsyadin@gmail.com",
+  "password": "qweqwe"
+}
+
+
+###
+
+POST http://ettp.plnindonesiapower.co.id:5000/lemburs
+Content-Type: application/json
+
+{
+  "tanggal": "2023-02-10",
+  "jamMulai": "01:00",
+  "jamSelesai": "10:00",
+  "jenisHari": "Hari Libur Bersama",
+  "pekerjaanLebih": "asddasd"
+}
+###
+
+POST http://ettp.plnindonesiapower.co.id:5000/pikets
+Content-Type: application/json
+
+{
+  "tanggal": "2023-03-09",
+  "jamMulai": "00:00:00",
+  "jamSelesai": "14:30:00",
+  "jenisPiket": "Khusus",
+  "jenisHari": "Hari Kerja",
+  "pekerjaanLebih": "Control Room"
+}
+###
+
+POST http://ettp.plnindonesiapower.co.id:5000/premis
+Content-Type: application/json
+
+{
+  "tanggal": "2023-04-01",
+  "jamMulai": "00:00:00",
+  "jamSelesai": "05:30:00",
+  "jenisShift": "Siang",
+  "jenisHari": "Hari Kerja",
+  "pekerjaanLebih": "Control Room"
+}
+###
+
+POST http://ettp.plnindonesiapower.co.id:5000/pikets
+Content-Type: application/json
+
+{
+  "tanggal": "2023-01-01",
+  "jamMulai": "00:00:00",
+  "jamSelesai": "08:00:00",
+  "jenisPiket": "Khusus",
+  "jenisHari": "Hari Libur",
+  "pekerjaanLebih": "tes piket3"
+}
+###
+
+PATCH http://ettp.plnindonesiapower.co.id:5000/lemburs/c5fe979d-1d6d-4edb-9d2a-b8801b892731/status
+Content-Type: application/json
+
+{
+  "statusApproval": "Disetujui"
+}
+###
+
+PATCH http://ettp.plnindonesiapower.co.id:5000/pikets/a67dd9da-96bc-46bd-b09f-fbcf357f8f3c/status
+Content-Type: application/json
+
+{
+  "status": "Disetujui"
+}
+###
+
+PATCH http://ettp.plnindonesiapower.co.id:5000/premis/ed448bfe-70c5-43ef-b2d9-bad5864b7002/status
+Content-Type: application/json
+
+{
+  "status": "Disetujui"
+}
+###
+
+PATCH http://ettp.plnindonesiapower.co.id:5000/users/60aae535-4778-49a5-b1cd-1c99a81d1422
+Content-Type: application/json
+
+{
+  "tarifTTP1Maksimum": "1000800"
+}
+###
+
+
+GET http://ettp.plnindonesiapower.co.id:5000/lemburs/67f834ae-8fdb-4cc4-a8cd-187ed462e004
+
+###
+
+GET http://ettp.plnindonesiapower.co.id:5000/lemburs/approval
+
+###
+GET http://ettp.plnindonesiapower.co.id:5000/pikets/approval
+
+###
+
+GET http://ettp.plnindonesiapower.co.id:5000/premis/
+
+###
+
+GET http://ettp.plnindonesiapower.co.id:5000/products/
+
+###
+GET http://ettp.plnindonesiapower.co.id:5000/me
+
+
+###
+#get user uuid
+GET http://ettp.plnindonesiapower.co.id:5000/users
+
+###
+#log out user
+DELETE http://ettp.plnindonesiapower.co.id:5000/logout
+
+
+###
+#add admin user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Zid Irsyadin Sartono Wijaogy",
+  "email" : "zidirsyadin@gmail.com",
+  "password" : "qweqwe",
+  "confPassword" : "qweqwe",
+  "role" : "admin",
+  "nip" : "123456789Z",
+  "tempatLahir" : "Wonomulyo",
+  "tanggalLahir" : "2001-08-07",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "Admin",
+  "jabatan" : "Admin1",
+  "jenjangJabatan" : "Admin",
+  "bagian" : "Admin Developer",
+  "grade" : "Admin Super Dev",
+  "unitKerja" : "Admin Fullstack1",
+  "atasan" : "Dosen Pembimbing",
+  "konversiTingkatJabatan" : "1",
+  "skalaGajiDasar" : "46",
+  "tarifTTP2" : "29330",
+  "tarifTTP2Maksimum" : "1532400",
+  "tarifTTP1" : "29330",
+  "tarifTTP1Maksimum" : "1532400"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Andi Arsyad",
+  "email" : "andiarsyad@gmail.com",
+  "password" : "qweqwe",
+  "confPassword" : "qweqwe",
+  "role" : "user",
+  "nip" : "6993052F",
+  "tempatLahir" : "Wonomulyo",
+  "tanggalLahir" : "2001-08-07",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "Pegawai",
+  "jabatan" : "Manager Unit Layanan Pusat Listrik Tenaga Diesel Tello Sub Unit UPDK Tello",
+  "jenjangJabatan" : "Penyelia Atas",
+  "bagian" : "Operasi",
+  "grade" : "System 2",
+  "bidang" : "Tenaga Diesel Tello",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Direktur Layanan Pusat",
+  "skalaGajiDasar" : "25",
+  "tarifTTP2" : "12800",
+  "tarifTTP2Maksimum" : "1532400"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Fajar Abdullah",
+  "email" : "fajarabdullah@gmail.com",
+  "password" : "qweqwe",
+  "confPassword" : "qweqwe",
+  "role" : "user",
+  "nip" : "9718062FBY",
+  "tempatLahir" : "Wonomulyo",
+  "tanggalLahir" : "2001-08-07",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "Pegawai",
+  "jabatan" : "Junior Technician Operasi Control Room (A-D) ULPLTD Selayar",
+  "jenjangJabatan" : "Pelaksana",
+  "bagian" : "Control",
+  "grade" : "Basic 3",
+  "bidang" : "Control Room Tello",
+  "unitKerja" : "ULPLTD Selayar",
+  "atasan" : "Officer Operasi Control Room (A-D) ULPLTD Selayar",
+  "skalaGajiDasar" : "3",
+  "tarifTTP2" : "5210",
+  "tarifTTP2Maksimum" : "895200"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Andi Arsyad",
+  "email" : "andi.arsyad@plnindonesiapower.co.id",
+  "password" : "andiarsyad",
+  "confPassword" : "andiarsyad",
+  "role" : "admin1",
+  "nip" : "6993052F",
+  "tempatLahir" : "Selayar",
+  "tanggalLahir" : "1969-09-01",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Manager Unit Layanan Pusat Listrik Tenaga Diesel Tello Sub Unit UPDK Tello",
+  "jenjangJabatan" : "Penyelia Atas",
+  "bagian" : "ULPLTD DTL",
+  "grade" : "14.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Hariady Bayu Aji",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "25",
+  "tarifTTP2" : "12800",
+  "tarifTTP2Maksimum" : "1532400",
+  "tarifTTP1" : "11",
+  "tarifTTP1Maksimum" : "11"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Hariady Bayu Aji",
+  "email" : "hariady.aji@plnindonesiapower.co.id",
+  "password" : "hariadyba",
+  "confPassword" : "hariadyba",
+  "role" : "admin2",
+  "nip" : "7906167Z",
+  "tempatLahir" : "Kendari",
+  "tanggalLahir" : "1979-11-01",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Manager Unit Pelaksana Pengendalian Pembangkitan Tello",
+  "jenjangJabatan" : "Penyelia Atas",
+  "bagian" : "BAG AUM",
+  "grade" : "16.PeG",
+  "bidang" : "BAG AUM",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Zid Irsyadin Sartono Wijaogy",
+  "konversiTingkatJabatan" : "1",
+  "skalaGajiDasar" : "Skala 18",
+  "tarifTTP2" : "1",
+  "tarifTTP2Maksimum" : "1",
+  "tarifTTP1" : "1",
+  "tarifTTP1Maksimum" : "1"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Zid Irsyadin Sartono Wijaogy",
+  "email" : "zidirsyadin@gmail.com",
+  "password" : "qweqwe",
+  "confPassword" : "qweqwe",
+  "role" : "superadmin",
+  "nip" : "6993052F",
+  "tempatLahir" : "Selayar",
+  "tanggalLahir" : "1969-09-01",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Manager Unit Layanan Pusat Listrik Tenaga Diesel Tello Sub Unit UPDK Tello",
+  "jenjangJabatan" : "Penyelia Atas",
+  "bagian" : "ULPLTD DTL",
+  "grade" : "14.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Dospem",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "25",
+  "tarifTTP2" : "12800",
+  "tarifTTP2Maksimum" : "1532400",
+  "tarifTTP1" : "11",
+  "tarifTTP1Maksimum" : "11"
+}
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Ibnu Khisam",
+  "email" : "ibnu.khisam@plnindonesiapower.co.id",
+  "password" : "ibnukhisam",
+  "confPassword" : "ibnukhisam",
+  "role" : "user",
+  "nip" : "9517732ZY",
+  "tempatLahir" : "Sragen",
+  "tanggalLahir" : "1995-05-27",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Team Leader Lingkungan UPDK Tello",
+  "jenjangJabatan" : "Pelaksana",
+  "bagian" : "BAG AUM",
+  "grade" : "11.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Andi Arsyad",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "6",
+  "tarifTTP2" : "6160",
+  "tarifTTP2Maksimum" : "895200",
+  "tarifTTP1" : "33700",
+  "tarifTTP1Maksimum" : "1000800"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Zainal Arifin",
+  "email" : "zainal.arifin1@plnindonesiapower.co.id",
+  "password" : "zainalarifin",
+  "confPassword" : "zainalarifin",
+  "role" : "admin1",
+  "nip" : "9517732ZY",
+  "tempatLahir" : "Sragen",
+  "tanggalLahir" : "1995-05-27",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Team Leader Lingkungan UPDK Tello",
+  "jenjangJabatan" : "Penyelia Dasar",
+  "bagian" : "BAG AUM",
+  "grade" : "11.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Hariady Bayu Aji",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "4",
+  "tarifTTP2" : "6460",
+  "tarifTTP2Maksimum" : "1170000",
+  "tarifTTP1" : "54400",
+  "tarifTTP1Maksimum" : "1274400"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Adelia Fhienz",
+  "email" : "adelia.fhienz@plnindonesiapower.co.id",
+  "password" : "adelia",
+  "confPassword" : "adelia",
+  "role" : "user",
+  "nip" : "6993052F",
+  "tempatLahir" : "Selayar",
+  "tanggalLahir" : "1969-09-01",
+  "gender" : "Perempuan ",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Pelaksana Unit Layanan Pusat Listrik Tenaga Diesel Tello Sub Unit UPDK Tello",
+  "jenjangJabatan" : "Pelaksana",
+  "bagian" : "ULPLTD DTL",
+  "grade" : "8.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Zainal Arifin",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "15",
+  "tarifTTP2" : "8800",
+  "tarifTTP2Maksimum" : "1000800",
+  "tarifTTP1" : "11",
+  "tarifTTP1Maksimum" : "11"
+}

@@ -1,0 +1,240 @@
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Hariady Bayu Aji",
+  "email" : "hariady.aji@plnindonesiapower.co.id",
+  "password" : "hariadyba",
+  "confPassword" : "hariadyba",
+  "role" : "user",
+  "nip" : "7906167Z",
+  "tempatLahir" : "Kendari",
+  "tanggalLahir" : "1979-11-01",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Manager Unit Pelaksana Pengendalian Pembangkitan Tello",
+  "jenjangJabatan" : "Penyelia Atas",
+  "bagian/bidang" : "BAG AUM",
+  "grade" : "16.PeG",
+  "bidang" : "BAG AUM",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "",
+  "konversiTingkatJabatan" : "",
+  "skalaGajiDasar" : "Skala 18",
+  "tarifTTP2" : "",
+  "tarifTTP2Maksimum" : "",
+  "tarifTTP1" : "",
+  "tarifTTP1Maksimum" : ""
+}
+
+###
+#add user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Andi Arsyad",
+  "email" : "andi.arsyad@plnindonesiapower.co.id",
+  "password" : "andiarsyad",
+  "confPassword" : "andiarsyad",
+  "role" : "user",
+  "nip" : "6993052F",
+  "tempatLahir" : "Selayar",
+  "tanggalLahir" : "1969-09-01",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Manager Unit Layanan Pusat Listrik Tenaga Diesel Tello Sub Unit UPDK Tello",
+  "jenjangJabatan" : "Penyelia Atas",
+  "bagian" : "ULPLTD DTL",
+  "grade" : "14.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Hariady Bayu Aji",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "25",
+  "tarifTTP2" : "12800",
+  "tarifTTP2Maksimum" : "1532400",
+  "tarifTTP1" : "sdfsdfsdfsdf",
+  "tarifTTP1Maksimum" : "sdfsdfsfsdf"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Zainal Arifin",
+  "email" : "zainal.arifin1@plnindonesiapower.co.id",
+  "password" : "zainalarifin",
+  "confPassword" : "zainalarifin",
+  "role" : "user",
+  "nip" : "9517732ZY",
+  "tempatLahir" : "Sragen",
+  "tanggalLahir" : "1995-05-27",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Team Leader Lingkungan UPDK Tello",
+  "jenjangJabatan" : "Penyelia Dasar",
+  "bagian" : "BAG AUM",
+  "grade" : "11.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Hariady Bayu Aji",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "4",
+  "tarifTTP2" : "6460",
+  "tarifTTP2Maksimum" : "1170000",
+  "tarifTPP1" : "54400",
+  "tarifTTP1Maksimum" : "1274400"
+}
+
+###
+#add user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Aldi Rizal",
+  "email" : "aldi.rizal@plnindonesiapower.co.id",
+  "password" : "aldirizal",
+  "confPassword" : "aldirizal",
+  "role" : "user",
+  "nip" : "9616078FY",
+  "tempatLahir" : "Langnga-Langnga",
+  "tanggalLahir" : "1996-09-06",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Junior Officer Lingkungan UPDK Tello",
+  "jenjangJabatan" : "Pelaksana",
+  "bagian" : "BAG AUM",
+  "grade" : "9.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Zainal Arifin",
+  "konversiTingkatJabatan" : "5",
+  "skalaGajiDasar" : "4",
+  "tarifTTP2" : "5640",
+  "tarifTTP2Maksimum" : "895200",
+  "tarifTPP1" : "33700fhfghgfhf",
+  "tarifTTP1Maksimum" : "1000800"
+}
+
+###
+#add user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Tasya Diah Rachmadiani",
+  "email" : "tasya.diah@plnindonesiapower.co.id",
+  "password" : "tasyadiahr",
+  "confPassword" : "tasyadiahr",
+  "role" : "user",
+  "nip" : "9518958ZY",
+  "tempatLahir" : "Purwakarta",
+  "tanggalLahir" : "1995-10-06",
+  "gender" : "perempuan",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Junior Officer Lingkungan UPDK Tello",
+  "jenjangJabatan" : "Pelaksana",
+  "bagian" : "BAG AUM",
+  "grade" : "10.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Zainal Arifin",
+  "konversiTingkatJabatan" : "5",
+  "skalaGajiDasar" : "dgfgdfgdfg",
+  "tarifTTP2" : "6160",
+  "tarifTTP2Maksimum" : "895200",
+  "tarifTTP1" : "33700",
+  "tarifTTP1Maksimum" : "1000800"
+}
+
+###
+#add user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Fakhri Aldiyaz",
+  "email" : "fakhri.aldiyaz@plnindonesiapower.co.id",
+  "password" : "fakhrialdiyaz",
+  "confPassword" : "fakhrialdiyaz",
+  "role" : "user",
+  "nip" : "9418697ZY",
+  "tempatLahir" : "Bandung",
+  "tanggalLahir" : "1994-12-09",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Team Leader Operasi UPLTD Tello",
+  "jenjangJabatan" : "Penyelia Dasar",
+  "bagian" : "ULPLTD DTL",
+  "grade" : "11.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Andi Arsyad",
+  "konversiTingkatJabatan" : "8",
+  "skalaGajiDasar" : "3",
+  "tarifTTP2" : "6840",
+  "tarifTTP2Maksimum" : "1170000",
+  "tarifTTP1" : "46400",
+  "tarifTTP1Maksimum" : "1274400"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Chaeryandi",
+  "email" : "chaeryandi@plnindonesiapower.co.id",
+  "password" : "chaeryandi",
+  "confPassword" : "chaeryandi",
+  "role" : "user",
+  "nip" : "9413056FY",
+  "tempatLahir" : "Ujung Pandang",
+  "tanggalLahir" : "1994-01-08",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Junior Technician Operasi Mesin (A-D) ULPLTD Tello",
+  "jenjangJabatan" : "Pelaksana",
+  "bagian" : "ULPLTD DTL",
+  "grade" : "10.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Fakhri Aldiyaz",
+  "konversiTingkatJabatan" : "5",
+  "skalaGajiDasar" : "6",
+  "tarifTTP2" : "6160",
+  "tarifTTP2Maksimum" : "895200",
+  "tarifTTP1" : "33700",
+  "tarifTTP1Maksimum" : "1000800"
+}
+
+###
+#add user
+POST http://ettp.plnindonesiapower.co.id:5000/users
+Content-Type: application/json
+
+{
+  "name" : "Hamka",
+  "email" : "hamka.079@plnindonesiapower.co.id",
+  "password" : "hamka079",
+  "confPassword" : "hamka079",
+  "role" : "user",
+  "nip" : "9616079FY",
+  "tempatLahir" : "Doping",
+  "tanggalLahir" : "1996-06-26",
+  "gender" : "Laki-laki",
+  "statusPegawai" : "TUGAS KARYA DARI PLN",
+  "jabatan" : "Junior Technician Operasi Control Room (A-D) ULPLTD Tello",
+  "jenjangJabatan" : "Pelaksana",
+  "bagian" : "ULPLTD DTL",
+  "grade" : "9.PeG",
+  "unitKerja" : "Sub Unit UPDK Tello",
+  "atasan" : "Fakhri Aldiyaz",
+  "konversiTingkatJabatan" : "5",
+  "skalaGajiDasar" : "6",
+  "tarifTTP2" : "5750",
+  "tarifTTP2Maksimum" : "895200",
+  "tarifTTP1" : "33700",
+  "tarifTTP1Maksimum" : "1000800"
+}

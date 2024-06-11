@@ -1,0 +1,335 @@
+/* Global Styles */
+body {
+  font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+}
+
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+.ant-layout-sider {
+  flex: 0 0 230px !important;
+  max-width: 230px !important;
+  min-width: 230px !important;
+  width: 230px !important;
+  background: white !important;
+}
+
+.ant-layout-sider-collapsed {
+  flex: 0 0 80px !important;
+  max-width: 80px !important;
+  min-width: 80px !important;
+  width: 80px !important;
+}
+
+.logo {
+  background: white;
+  margin: 0;
+  height: 64px;
+}
+
+.iconsidebar {
+  color: transparent;
+  background: linear-gradient(rgb(164, 255, 179), rgb(0, 125, 250));
+  -webkit-background-clip: text;
+}
+
+.sidebarlogo {
+  margin: 10px;
+}
+
+.sm-logo {
+  display: none;
+  transition: 0.3s;
+}
+
+.lg-logo {
+  transition: 0.3s;
+  height: 40px;
+  display: flex;
+  align-items: center; /* Mengatur logo secara vertikal di tengah */
+}
+
+
+.ant-layout-sider-collapsed .sm-logo {
+  display: block;
+  height: 50px;
+  padding: 10px 0 0 0;
+  margin-left: 20px;
+  transition: 0.3s;
+}
+
+.ant-layout-sider-collapsed .lg-logo {
+  display: none;
+  height: 50px;
+  transition: 0.3s;
+}
+
+main {
+  overflow-y: scroll;
+  background-color: transparent !important;
+}
+
+.ant-menu-title-content {
+  font-size: 16px;
+}
+
+.ant-layout-header h5 {
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.ant-layout-header p {
+  line-height: 20px;
+  font-size: 13px;
+}
+
+.ant-layout-header div .badge {
+  top: 16px;
+  right: -6px;
+}
+
+/* Dashboard Styles */
+
+/* Login Styles */
+.login-page {
+  display: flex;
+  height: 100vh; /* Menggunakan tinggi layar penuh */
+}
+.login-left {
+  flex: 1; /* Mengambil setengah lebar layar */
+  background: linear-gradient(rgb(164, 255, 179), rgb(0, 125, 250)); /* Latar belakang linear gradient */
+  align-items: center;
+  justify-content: center;
+}
+.login-right {
+  flex: 1; /* Mengambil setengah lebar layar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Ruang di sekitar form */
+}
+.custom-form {
+  width: 30vw; /* Menambahkan lebar khusus untuk form ini */
+}
+.login-container {
+  display: flex;
+  height: 100vh; 
+}
+.left-side {
+  flex: 1;
+  background: linear-gradient(rgb(164, 255, 179), rgb(0, 125, 250));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center-text {
+  text-align: center;
+  color: white;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 10000;
+  line-height: normal;
+}
+.right-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-form {
+  width: 30vw;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Halaman Lembur Styles */
+.bglembur {
+  border-radius: 25px;
+  width: auto;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.judul_font {
+  font-size: 25px;
+  font-weight: 700;
+  padding: 20px 30px 0px 30px;
+}
+
+.judul_font2 {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 30px 0px 30px;
+}
+
+.select_bulan {
+  padding: 8px 10px 0px 10px;
+  justify-content: right;
+}
+
+.ant-select-selection {
+  border-color: black;
+}
+
+.text_isi {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  padding: 5px 10px 10px 30px;
+}
+
+.text_label {
+  padding-left: 30px;
+  margin-Bottom: 5px;
+}
+
+.sd {
+  padding-top: 5px;
+}
+
+.button_batal {
+  color: black;
+  background-color: white;
+  border-color: black;
+  align-items: center;
+}
+
+.history_lembur {
+  padding-left: 280px;
+}
+
+.history_piket {
+  padding-left: 337px;
+}
+
+.history_premi {
+  padding-left: 230px;
+}
+
+/* Rekap Styles */
+.tombol {
+  width: 146px;
+  height: 37px;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+.catatan_top {
+  padding-top: 20px;
+}
+
+/* Data Pegawai Styles */
+/* .bginfopribadi {
+  border-radius: 30px;
+  width: 43vw;
+  height: 30vh;
+  flex-shrink: 0;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.25);
+} */
+.bginfopribadi {
+  border-radius: 30px;
+  width: 81vw;
+  height: 20vh;
+  flex-shrink: 0;
+  margin-top: 20px;
+}
+
+.bginfo {
+  border-radius: 10px;
+  height: 40px;
+  border: 1px solid #D9D9D9;
+}
+
+.informasi_pribadi {
+  padding: 4px 3px 3px 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.nama_lengkap {
+  padding: 20px 0px 10px 50px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nama_depan {
+  padding: 0px 0px 0px 0px;
+}
+
+.bgdatapegawai {
+  border-radius: 30px;
+  width: 81vw;
+  height: 40vh;
+  flex-shrink: 0;
+  margin-top: 30px;
+  /* box-shadow: -4px -4px 0px 0px rgba(0, 0, 0, 0.25); */
+}
+
+.input-group p {
+  margin-bottom: 10px;
+}
+
+.ant-input-affix-wrapper {
+  border: 1px solid #868AA5;
+  height: 5vh;
+  border-radius: 10px;
+}
+
+.custom-table .ant-table-thead > tr > th {
+  background-color: #D3EFFF;; /* Warna latar belakang header */
+  color: #000; /* Warna teks header */
+  border-color: #000; /* Warna garis */
+  font-weight: 500;
+}
+
+.custom-table .ant-table-tbody > tr > td {
+  border-color: #808080; /* Warna garis */
+}
+
+.custom-table .ant-table-cell {
+    font-size: 12px; /* Atur ukuran font sesuai keinginan Anda */
+}
+
+/* :where(.css-dev-only-do-not-override-2i2tap)[class^="ant-form"], :where(.css-dev-only-do-not-override-2i2tap)[class*=" ant-form"] {
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+    font-size: 14px;
+    box-sizing: border-box;
+} */
+
+.ant-row .ant-form-item-row .css-dev-only-do-not-override-2i2tap {
+  width: 10vw;
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* .ant-form .ant-form-horizontal .css-dev-only-do-not-override-2i2tap{
+  width: 1000vw;
+} */
+
+.ant-form .ant-form-horizontal {
+  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 14px;
+    line-height: 1.5714285714285714;
+    list-style: none;
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+    width: 40vw;
+}

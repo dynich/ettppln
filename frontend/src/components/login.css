@@ -1,0 +1,98 @@
+/* File: LoginPage.css */
+
+/* .login-container {
+  display: flex;
+  height: 100vh; Set height to full viewport height
+} */
+
+/* .left-side {
+  background: linear-gradient(rgb(164, 255, 179), rgb(0, 125, 250));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* .center-text {
+  text-align: center;
+  color: white;
+} */
+
+/* .right-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* .login-form {
+  width: 800px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+/* .login-form h2 {
+  margin-bottom: 20px;
+} */
+
+/* label {
+  display: block;
+  margin-bottom: 8px;
+} */
+
+/* input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+} */
+
+/* button {
+  background-color: #007dff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+/* button:hover {
+  background-color: #0056b3;
+} */
+
+.login-page {
+  display: flex;
+  height: 100vh; /* Menggunakan tinggi layar penuh */
+}
+.login-left {
+  flex: 1; /* Mengambil setengah lebar layar */
+  background: linear-gradient(rgb(164, 255, 179), rgb(0, 125, 250)); /* Latar belakang linear gradient */
+  align-items: center;
+  justify-content: center;
+}
+.login-right {
+  flex: 1; /* Mengambil setengah lebar layar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Ruang di sekitar form */
+}
+
+.login-form {
+  width: 30vw;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+:where(.css-dev-only-do-not-override-2i2tap).ant-form {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 14px;
+    line-height: 1.5714285714285714;
+    list-style: none;
+    font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';
+    width: 40vw;
+}

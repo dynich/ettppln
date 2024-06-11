@@ -1,0 +1,82 @@
+.bgwelcome {
+  border-radius: 25px;
+  width: auto;
+  height: 30vh;
+  flex-shrink: 0;
+  background: linear-gradient(94deg, #007DFA 28.52%, #A4FFB3 120.62%);
+}
+
+.textdashboard {
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.textdashboard2 {
+  color: #FFF;
+  font-weight: 700;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.gradient-box {
+  background: linear-gradient(90deg, #168FF0 2.48%, #A4FFB3 118.79%);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 25vw;
+  height: 2.3vh;
+  flex-shrink: 0;
+}
+
+.menu-box {
+  display: flex;
+  border: none;
+  width: 25vw;
+  height: 38.89vh;
+  padding: 33px 30px 33px 30px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 0px 0px 30px 30px;
+  background: #FFF;
+  box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+.text-menu {
+  color: #168FF0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.text-menu-p {
+  color: #525C60;
+  text-align: justify;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 165.4%;
+}
+
+.text-menu-desc {
+  height: 80px;
+}
+
+.menu-button {
+  display: inline-block;
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif; /* Ganti font-family */
+}
+
+.menu-button:hover {
+  background-color: #0056b3;
+}
+

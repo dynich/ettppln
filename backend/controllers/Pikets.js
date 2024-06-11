@@ -298,6 +298,37 @@ export const getPiketById = async (req, res) => {
     }
 };
 
+export const approveAllPending = async (req, res) => {
+    try {
+      // Check if the user is admin1
+      if (req.role !== "admin1") {
+        return res.status(403).json({ msg: "Akses terlarang" });
+      }
+  
+      // Fetch all pending pikets
+      const pendingPikets = await Pikets.findAll({
+        where: {
+          admin1Approval: {
+            [Op.ne]: "Disetujui",
+          },
+        },
+      });
+  
+      // Update each pending lembur to "Disetujui"
+      for (const piket of pendingPikets) {
+        await Pikets.update(
+          { admin1Approval: "Disetujui" },
+          { where: { uuid: piket.uuid } }
+        );
+      }
+  
+      res.status(200).json({ msg: "All pending approvals have been approved" });
+    } catch (error) {
+      console.error("Error in approveAllPending:", error);
+      res.status(500).json({ msg: "Failed to approve all pending entries" });
+    }
+  };
+
 export const updatePiket = async (req, res) => {
     try {
         const piket = await Pikets.findOne({

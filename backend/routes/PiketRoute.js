@@ -3,6 +3,7 @@ import {
     getPikets,
     getApprovalPiket,
     getApprovalPiketById,
+    approveAllPending,
     getPiketById,
     createPiket,
     updatePiket,
@@ -19,6 +20,7 @@ router.get('/pikets/approval/:id', verifyUser, adminOnly, getApprovalPiketById);
 router.get('/pikets/:id', verifyUser, getPiketById);
 router.post('/pikets', verifyUser, createPiket);
 router.patch('/pikets/approval/:id', verifyUser, adminOnly, updatePiket);
+router.patch('/pikets/approve-all', verifyUser, adminOnly, approveAllPending);
 router.patch('/pikets/:id', verifyUser, updatePiket);
 router.patch('/pikets/:id/status', verifyUser, adminOnly, updateStatus);
 router.delete('/pikets/:id', verifyUser, deletePiket);

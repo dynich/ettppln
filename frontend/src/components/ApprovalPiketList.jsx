@@ -167,6 +167,33 @@ const ApprovalPiketList = () => {
     }
   };
 
+  const { confirm } = Modal;
+
+  const approveAllPending = async () => {
+    confirm({
+      title: 'Are you sure you want to approve all pending entries?',
+      content: 'This action will update the status of all pending entries to "Disetujui".',
+      onOk: async () => {
+        try {
+          // Call the new bulk approval endpoint
+          await axios.patch('http://localhost:5000/pikets/approve-all');
+  
+          // Refresh the lembur list
+          await getApprovalPiket();
+  
+          // Show success message
+          message.success("All pending approvals have been approved");
+        } catch (error) {
+          console.error("Error in approveAllPending:", error);
+          message.error("Failed to approve all pending entries");
+        }
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
   useEffect(() => {
     if (id) {
       const getPiketById = async () => {
@@ -241,7 +268,25 @@ const ApprovalPiketList = () => {
           { title: 'Grade', dataIndex: 'grade', key: 'grade' },
           { title: 'Admin1 Approval', dataIndex: 'admin1Approval', key: 'admin1Approval' },
           {
-            title: 'Actions', dataIndex: 'actions', key: 'actions', render: (_, record) => (
+            title: (
+              <div>
+                Actions
+                <Button
+                  type="primary"
+                  onClick={approveAllPending}
+                  style={{
+                    marginLeft: "10px",
+                    backgroundColor: "#04AA6D",
+                    borderColor: "#04AA6D",
+                    color: "white",
+                    fontSize: "12px",
+                  }}
+                >
+                  Setujui Semua
+                </Button>
+              </div>
+            ),
+            dataIndex: 'actions', key: 'actions', render: (_, record) => (
               <Space>
                 {record.admin1Approval !== 'Disetujui' && record.admin1Approval !== 'Ditolak' && (
                   <Link to={`/approval/approvalpiket/edit/${record.key}`}>

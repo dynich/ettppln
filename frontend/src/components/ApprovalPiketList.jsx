@@ -256,6 +256,21 @@ const ApprovalPiketList = () => {
       { title: 'Status Approval', dataIndex: 'statusApproval', key: 'statusApproval' },
       { title: 'Bayar Piket Rutin', dataIndex: 'bayarPiketRutin', key: 'bayarPiketRutin' },
       { title: 'Bayar Piket Khusus', dataIndex: 'bayarPiketKhusus', key: 'bayarPiketKhusus' },
+      {
+        title: "Bukti Piket",
+        dataIndex: "buktiPiket",
+        key: "buktiPiket",
+        render: (text, record) =>
+          record.buktiPiket ? (
+            <a
+              href={`http://localhost:5000/${record.buktiPiket}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Lihat Bukti
+            </a>
+          ) : null,
+      },
     ];
 
 
@@ -411,6 +426,7 @@ const ApprovalPiketList = () => {
       admin1Approval: piket.admin1Approval,
       admin2Approval: piket.admin2Approval,
       superadminApproval: piket.superadminApproval,
+      buktiPiket: piket.buktiPiket,
 
     };
 

@@ -17,26 +17,13 @@ const router = express.Router();
 
 router.get("/lemburs", verifyUser, getLemburs);
 router.get("/lemburs/approval", verifyUser, adminOnly, getApprovalLembur);
-router.get(
-  "/lemburs/approval/:id",
-  verifyUser,
-  adminOnly,
-  getApprovalLemburById
-);
+router.get("/lemburs/approval/:id", verifyUser, adminOnly, getApprovalLemburById);
 router.get("/lemburs/:id", verifyUser, getLemburById);
-// router.post("/lemburs", upload.single("buktiLembur"), createLembur);
-router.post(
-  "/lemburs",
-  verifyUser,
-  upload.single("buktiLembur"),
-  (req, res, next) => {
-    console.log("Hit createLembur route");
-    console.log("Request body:", req.body);
-    console.log("Uploaded file:", req.file);
-    next();
-  },
-  createLembur
-);
+router.post("/lemburs", verifyUser, upload.single('buktiLembur'), createLembur);
+router.post('/upload', upload.single('buktiLembur'), (req, res) => {
+  // Proses unggahan berkas di sini
+  res.send('File uploaded successfully');
+})
 router.patch("/lemburs/approval/:id", verifyUser, adminOnly, updateLembur);
 router.patch('/lemburs/approve-all', verifyUser, approveAllPending);
 router.patch("/lemburs/:id", verifyUser, updateLembur);

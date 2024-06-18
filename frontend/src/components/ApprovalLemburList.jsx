@@ -272,17 +272,24 @@ const ApprovalLemburList = () => {
       { title: "Jam Mulai", dataIndex: "jamMulai", key: "jamMulai" },
       { title: "Jam Selesai", dataIndex: "jamSelesai", key: "jamSelesai" },
       { title: "Jenis Hari", dataIndex: "jenisHari", key: "jenisHari" },
-      {
-        title: "Pekerjaan Lebih",
-        dataIndex: "pekerjaanLebih",
-        key: "pekerjaanLebih",
-      },
-      {
-        title: "Status Approval",
-        dataIndex: "statusApproval",
-        key: "statusApproval",
-      },
+      { title: "Pekerjaan Lebih", dataIndex: "pekerjaanLebih", key: "pekerjaanLebih"},
+      { title: "Status Approval", dataIndex: "statusApproval", key: "statusApproval"},
       { title: "Bayar TTP2", dataIndex: "bayarTTP2", key: "bayarTTP2" },
+      {
+        title: "Bukti Lembur",
+        dataIndex: "buktiLembur",
+        key: "buktiLembur",
+        render: (text, record) =>
+          record.buktiLembur ? (
+            <a
+              href={`http://localhost:5000/${record.buktiLembur}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Lihat Bukti
+            </a>
+          ) : null,
+      },
     ];
     if (user && user.role) {
       if (user.role === "admin1") {
@@ -535,7 +542,8 @@ const ApprovalLemburList = () => {
     const formattedDate = date.toLocaleDateString("id-ID", options);
     return `${formattedDate.split(",")[0]} / ${formattedDate
       .split(",")[1]
-      .trim()}`;
+      // .trim()
+    }`;
   };
 
   const data = lemburs.map((lembur, index) => {
@@ -558,6 +566,7 @@ const ApprovalLemburList = () => {
       admin1Approval: lembur.admin1Approval,
       admin2Approval: lembur.admin2Approval,
       superadminApproval: lembur.superadminApproval,
+      buktiLembur: lembur.buktiLembur,
     };
 
     return rowData;

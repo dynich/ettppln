@@ -3,6 +3,7 @@ import {
     getPremis,
     getApprovalPremi,
     getApprovalPremiById,
+    approveAllPending,
     getPremiById,
     createPremi,
     updatePremi,
@@ -19,6 +20,7 @@ router.get('/premis/approval/:id', verifyUser, adminOnly, getApprovalPremiById);
 router.get('/premis/:id', verifyUser,getPremiById);
 router.post('/premis', verifyUser, createPremi);
 router.patch('/premis/:id', verifyUser, updatePremi);
+router.patch('/premis/approve-all', verifyUser, adminOnly, approveAllPending);
 router.patch('/premis/approval/:id', verifyUser, adminOnly, updatePremi);
 router.patch('/premis/:id/status', verifyUser, adminOnly, updateStatus);
 router.delete('/premis/:id', verifyUser, deletePremi);

@@ -1,7 +1,6 @@
 import Lemburs from "../models/LemburModel.js";
 import Users from "../models/UserModel.js";
 import { Op } from "sequelize";
-// import upload from "../middlewares/upload.js";
 import moment from "moment";
 
 export const calculateLembur = (jamMulai, jamSelesai, jenisHari, user) => {
@@ -51,7 +50,7 @@ export const createLembur = async (req, res) => {
       jenisHari,
       pekerjaanLebih,
       statusApproval,
-      buktiLembur = req.file ? `..uploads/${req.file.filename}` : null,
+      buktiLembur = req.file ? `uploads/${req.file.filename}` : null,
     } = req.body;
 
     console.log(req.body)
@@ -79,8 +78,6 @@ export const createLembur = async (req, res) => {
       // Jika admin2 yang membuat, set admin1Approval menjadi kosong
       admin1ApprovalValue = "Disetujui";
     }
-
-    // const buktiLembur = req.file ? `/uploads/${req.file.filename}` : null;
 
     const lembur = await Lemburs.create({
       tanggal: moment(tanggal).format("YYYY-MM-DD"),

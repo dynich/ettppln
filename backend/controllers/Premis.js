@@ -285,6 +285,37 @@ export const getPremiById = async (req, res) => {
     }
 };
 
+export const approveAllPending = async (req, res) => {
+    try {
+      // Check if the user is admin1
+      if (req.role !== "admin1") {
+        return res.status(403).json({ msg: "Akses terlarang" });
+      }
+  
+      // Fetch all pending premis
+      const pendingPremis = await Premis.findAll({
+        where: {
+          admin1Approval: {
+            [Op.ne]: "Disetujui",
+          },
+        },
+      });
+  ngb
+      // Update each pending lembur to "Disetujui"
+      for (const premi of pendingPremis) {
+        await Premis.update(
+          { admin1Approval: "Disetujui" },
+          { where: { uuid: premi.uuid } }
+        );
+      }
+  
+      res.status(200).json({ msg: "All pending approvals have been approved" });
+    } catch (error) {
+      console.error("Error in approveAllPending:", error);
+      res.status(500).json({ msg: "Failed to approve all pending entries" });
+    }
+  };
+
 export const updatePremi = async (req, res) => {
     try {
         const premi = await Premis.findOne({

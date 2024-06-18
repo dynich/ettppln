@@ -175,6 +175,33 @@ const ApprovalPremiList = () => {
     }
   };
 
+  const { confirm } = Modal;
+
+  const approveAllPending = async () => {
+    confirm({
+      title: 'Are you sure you want to approve all pending entries?',
+      content: 'This action will update the status of all pending entries to "Disetujui".',
+      onOk: async () => {
+        try {
+          // Call the new bulk approval endpoint
+          await axios.patch('http://localhost:5000/premis/approve-all');
+  
+          // Refresh the lembur list
+          await getApprovalPremi();
+  
+          // Show success message
+          message.success("All pending approvals have been approved");
+        } catch (error) {
+          console.error("Error in approveAllPending:", error);
+          message.error("Failed to approve all pending entries");
+        }
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
   useEffect(() => {
     if (id) {
       const getPremiById = async () => {
@@ -256,7 +283,24 @@ const ApprovalPremiList = () => {
             key: "admin1Approval",
           },
           {
-            title: "Actions",
+            title: (
+              <div>
+                Actions
+                <Button
+                  type="primary"
+                  onClick={approveAllPending}
+                  style={{
+                    marginLeft: "10px",
+                    backgroundColor: "#04AA6D",
+                    borderColor: "#04AA6D",
+                    color: "white",
+                    fontSize: "12px",
+                  }}
+                >
+                  Setujui Semua
+                </Button>
+              </div>
+            ),
             dataIndex: "actions",
             key: "actions",
             render: (_, record) => (
@@ -499,6 +543,7 @@ const ApprovalPremiList = () => {
       admin1Approval: premi.admin1Approval,
       admin2Approval: premi.admin2Approval,
       superadminApproval: premi.superadminApproval,
+      buktiPremi: premi.buktiPremi,
     };
 
     return rowData;

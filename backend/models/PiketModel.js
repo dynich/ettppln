@@ -56,6 +56,10 @@ const Pikets = db.define('pikets', {
             notEmpty: true
         }
     },
+    buktiPiket: {
+        type: DataTypes.BLOB,
+        allowNull: true,
+    },
     jumlahHariSimbol1: {
         type: DataTypes.INTEGER,
         allowNull: false,

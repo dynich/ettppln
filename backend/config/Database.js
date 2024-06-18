@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
 
-const db = new Sequelize("tesettppln", "root", "", {
+const db = new Sequelize("cobaettpln", "root", "", {
   host: "localhost",
   dialect: "mysql",
   timezone: "Asia/Makassar",
-  port: 3306,
+  // port: 3306,
 });
 
 db.authenticate()

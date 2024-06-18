@@ -21,9 +21,6 @@ import path from "path";
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
 // const uploadDir = path.join(__dirname, "uploads");
 
@@ -33,6 +30,8 @@ const store = new sessionStore({
   db: db,
 });
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 (async () => {
   await db.sync();

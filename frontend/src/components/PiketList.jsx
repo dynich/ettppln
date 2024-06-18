@@ -27,10 +27,23 @@ const PiketList = () => {
   const [jenisPiket, setJenisPiket] = useState("");
   const [jenisHari, setJenisHari] = useState("Hari Kerja");
   const [pekerjaanLebih, setPekerjaanLebih] = useState("");
+  const [buktiPiket, setBuktiPiket] = useState(null);
   const [filterMonth, setFilterMonth] = useState("");
   const [filterYear, setFilterYear] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
   const [users, setUsers] = useState([]);
+
+  const handleFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const maxSize = 1000000; // 1MB in bytes
+      if (file.size > maxSize) {
+        message.error("Max file size is 1MB.");
+        return;
+      }
+      setBuktiPiket(file);
+    }
+  };
 
   useEffect(() => {
     // Lakukan permintaan HTTP untuk mengambil data pengguna dari server
@@ -60,30 +73,36 @@ const PiketList = () => {
 
   const submitPiket = (e) => {
     e.preventDefault();
-
     Modal.confirm({
       title: "Confirm Submission",
       content: "Are you sure you want to submit this piket?",
       onOk: async () => {
         try {
-          await axios.post("http://localhost:5000/pikets", {
-            tanggal: tanggal,
-            jamMulai: jamMulai,
-            jamSelesai: jamSelesai,
-            jenisPiket: jenisPiket,
-            jenisHari: jenisHari,
-            pekerjaanLebih: pekerjaanLebih,
+          const formData = new FormData();
+          formData.append("tanggal", tanggal);
+          formData.append("jamMulai", jamMulai);
+          formData.append("jamSelesai", jamSelesai);
+          formData.append("jenisPiket", jenisPiket);
+          formData.append("jenisHari", jenisHari);
+          formData.append("pekerjaanLebih", pekerjaanLebih);
+          formData.append("buktiPiket", buktiPiket);
+
+          await axios.post("http://localhost:5000/pikets", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
           });
+
           setTanggal("");
           setJamMulai("");
           setJamSelesai("");
           setJenisPiket("");
           setJenisHari("Hari Kerja");
           setPekerjaanLebih("");
+          setBuktiPiket("");
           getPikets();
           message.success("Submission successfully");
         } catch (error) {
-          console.error(error);
+          console.error("Error in submit Piket:", error);
+          message.error("Submission failed");
         }
       },
     });
@@ -115,6 +134,21 @@ const PiketList = () => {
       title: "Bayar Piket Khusus",
       dataIndex: "bayarPiketKhusus",
       key: "bayarPiketKhusus",
+    },
+    {
+      title: "Bukti Piket",
+      dataIndex: "buktiPiket",
+      key: "buktiPiket",
+      render: (text, record) =>
+        record.buktiPiket ? (
+          <a
+            href={`http://localhost:5000/${record.buktiPiket}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Lihat Bukti
+          </a>
+        ) : null,
     },
     {
       title: "Action",
@@ -174,6 +208,7 @@ const PiketList = () => {
       statusApproval: piket.statusApproval,
       bayarPiketRutin: piket.bayarPiketRutin,
       bayarPiketKhusus: piket.bayarPiketKhusus,
+      buktiPiket: piket.buktiPiket,
     };
 
     return rowData;
@@ -252,7 +287,7 @@ const PiketList = () => {
       pdf.text(`: ${rowData.jamMulai}`, 70, 97);
       pdf.text("Jam Selesai", 20, 105);
       pdf.text(`: ${rowData.jamSelesai}`, 70, 105);
-      pdf.text("Jenis Lembur", 20, 113);
+      pdf.text("Jenis Piket", 20, 113);
       pdf.text(": Piket", 70, 113);
       pdf.text("Pekerjaan Kerja Lebih", 20, 121);
       pdf.text(`: ${rowData.pekerjaanLebih}`, 70, 121);
@@ -426,7 +461,17 @@ const PiketList = () => {
                     />
                   </div>
                 </Space>
-                <div style={{ paddingLeft: "30px" }}>
+                <Space style={{ marginBottom: "10px", display: "block" }}>
+                <label className="text_label">Bukti Piket</label>
+                  <div style={{ paddingLeft: "30px" }}>
+                  <Input
+                    type="file"
+                    onChange={handleFileChange}
+                    required
+                    />
+                    </div>
+                </Space>
+                <div style={{ paddingLeft: "30px", paddingTop: "5px"}}>
                   <Button type="primary" htmlType="submit">
                     Ajukan Piket
                   </Button>

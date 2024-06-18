@@ -34,6 +34,19 @@ const LemburList = () => {
   const [filterStatus, setFilterStatus] = useState("");
   const [users, setUsers] = useState([]);
 
+  const handleFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const maxSize = 1000000; // 1MB in bytes
+      if (file.size > maxSize) {
+        message.error("Max file size is 1MB.");
+        return;
+      }
+      setBuktiLembur(file);
+    }
+  };
+
+  
   useEffect(() => {
     axios.get("http://localhost:5000/users").then((response) => {
       setUsers(response.data);
@@ -75,17 +88,17 @@ const LemburList = () => {
             headers: { "Content-Type": "multipart/form-data" },
           });
   
-          // setTanggal("");
-          // setJamMulai("");
-          // setJamSelesai("");
-          // setJumlahJamLembur("");
-          // setJenisHari("Hari Kerja");
-          // setPekerjaanLebih("");
-          // setBuktiLembur("");
+          setTanggal("");
+          setJamMulai("");
+          setJamSelesai("");
+          setJumlahJamLembur("");
+          setJenisHari("Hari Kerja");
+          setPekerjaanLebih("");
+          setBuktiLembur("");
           getLemburs();
           message.success("Submission successfully");
         } catch (error) {
-          console.error("Error in submitLembur:", error);
+          console.error("Error in submit Lembur:", error);
           message.error("Submission failed");
         }
       },
@@ -116,7 +129,7 @@ const LemburList = () => {
       render: (text, record) =>
         record.buktiLembur ? (
           <a
-            href={`http://localhost:5000${record.buktiLembur}`}
+            href={`http://localhost:5000/${record.buktiLembur}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -157,7 +170,8 @@ const LemburList = () => {
     const formattedDate = date.toLocaleDateString("id-ID", options);
     return `${formattedDate.split(",")[0]} / ${formattedDate
       .split(",")[1]
-      .trim()}`;
+      // .trim()
+    }`;
   };
 
   const data = lemburs.map((lembur, index) => {
@@ -471,8 +485,8 @@ const LemburList = () => {
                   <label>Bukti Lembur</label>
                   <Input
                     type="file"
-                    value={buktiLembur}
-                    onChange={(e) => setBuktiLembur(e.target.value)}
+                    // value={buktiLembur}
+                    onChange={handleFileChange}
                     required
                   />
                 </Space>

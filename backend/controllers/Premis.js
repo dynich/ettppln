@@ -18,8 +18,6 @@ export const calculatePremi = (jumlahHari, user, premi) => {
     };
 };
 
-
-
 export const createPremi = async (req, res) => {
     
     try {
@@ -300,8 +298,8 @@ export const approveAllPending = async (req, res) => {
           },
         },
       });
-  ngb
-      // Update each pending lembur to "Disetujui"
+
+      // Update each pending premi to "Disetujui"
       for (const premi of pendingPremis) {
         await Premis.update(
           { admin1Approval: "Disetujui" },

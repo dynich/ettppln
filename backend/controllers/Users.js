@@ -4,7 +4,7 @@ import argon2 from "argon2";
 export const getUsers = async (req, res) => {
     try {
         const response = await Users.findAll({
-            attributes: ['uuid', 'name', 'email', 'role','nip', 'tempatLahir', 'tanggalLahir', 'gender', 'statusPegawai', 'jabatan', 'jenjangJabatan', 'bagian', 'grade', 'unitKerja', 'atasan', 'konversiTingkatJabatan','skalaGajiDasar', 'tarifTTP2', 'tarifTTP2Maksimum', 'tarifTTP1', 'tarifTTP1Maksimum']
+            attributes: ['uuid', 'name', 'email', 'role','nip', 'tempatLahir', 'tanggalLahir', 'gender', 'statusPegawai', 'jabatan', 'jenjangJabatan', 'bagian', 'grade', 'unitKerja', 'atasan', 'konversiTingkatJabatan','skalaGajiDasar', 'tarifTTP2', 'tarifTTP2Maksimum', 'tarifTTP1', 'tarifTTP1Maksimum'],
         });
         res.status(200).json(response);
     } catch (error) {

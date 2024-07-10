@@ -25,7 +25,7 @@ router.post('/upload', upload.single('buktiLembur'), (req, res) => {
   res.send('File uploaded successfully');
 })
 router.patch("/lemburs/approval/:id", verifyUser, adminOnly, updateLembur);
-router.patch('/lemburs/approve-all', verifyUser, approveAllPending);
+router.patch('/lemburs/approve-all', verifyUser, adminOnly, approveAllPending);
 router.patch("/lemburs/:id", verifyUser, updateLembur);
 router.patch("/lemburs/:id/status", verifyUser, adminOnly, updateStatus);
 router.delete("/lemburs/:id", verifyUser, deleteLembur);

@@ -1,40 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Select, Table, Button, Space, Row, Col, Modal, message, Form } from 'antd';
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import { DownloadOutlined } from '@ant-design/icons';
-import * as XLSX from 'xlsx';
-import "../index.css"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Select,
+  Table,
+  Button,
+  Space,
+  Row,
+  Col,
+  Modal,
+  message,
+  Form,
+} from "antd";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { DownloadOutlined } from "@ant-design/icons";
+import * as XLSX from "xlsx";
+import "../index.css";
 
 //option
 const { Option } = Select;
 
 const { confirm } = Modal;
 
-
 const ApprovalPiketList = () => {
-
   const [pikets, setPiket] = useState([]);
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
   const { id } = useParams();
-  const [statusApproval, setStatusApproval] = useState('');
-  const [filterMonth, setFilterMonth] = useState('');
-  const [filterStatus, setFilterStatus] = useState('');
-  const [selectedMonth, setSelectedMonth] = useState('');
-  const [selectedYear, setSelectedYear] = useState('2023');
-  const [filterYear, setFilterYear] = useState('');
-
+  const [statusApproval, setStatusApproval] = useState("");
+  const [filterMonth, setFilterMonth] = useState("");
+  const [filterStatus, setFilterStatus] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [selectedYear, setSelectedYear] = useState("2023");
+  const [filterYear, setFilterYear] = useState("");
 
   const exportToExcel = async () => {
     if (!selectedMonth || !selectedYear) {
-      message.error('Silakan pilih bulan dan tahun terlebih dahulu');
+      message.error("Silakan pilih bulan dan tahun terlebih dahulu");
       return;
     }
     try {
-      const response = await axios.get(`http://localhost:5000/export/aggregated-pikets/${selectedMonth}/${selectedYear}`);
+      const response = await axios.get(
+        `http://localhost:5000/export/aggregated-pikets/${selectedMonth}/${selectedYear}`
+      );
       const dataForExcel = response.data.map((item, index) => {
         // Transformasi data sesuai kebutuhan
         return {
@@ -54,18 +63,17 @@ const ApprovalPiketList = () => {
           "Jumlah Hari Simbol 3": item.jumlahHariSimbol3,
           "Bayar Piket Rutin": item.bayarPiketRutin,
           "Bayar Piket Khusus": item.bayarPiketKhusus,
-          'statusApproval': item.statusApproval,
-          'admin1Approval': item.admin1Approval,
-          'admin2Approval': item.admin2Approval,
-          'superadminApproval': item.superadminApproval,
-
+          statusApproval: item.statusApproval,
+          admin1Approval: item.admin1Approval,
+          admin2Approval: item.admin2Approval,
+          superadminApproval: item.superadminApproval,
         };
       });
 
       const ws = XLSX.utils.json_to_sheet(dataForExcel);
 
       const columnWidths = [
-        { wch: 5 },  // Lebar untuk kolom 'No'
+        { wch: 5 }, // Lebar untuk kolom 'No'
         { wch: 20 }, // Lebar untuk kolom 'Nama'
         { wch: 12 }, // Lebar untuk kolom 'NIP'
         { wch: 40 }, // Lebar untuk 'Jabatan'
@@ -75,7 +83,7 @@ const ApprovalPiketList = () => {
         { wch: 20 },
         { wch: 20 },
         { wch: 20 },
-        { wch: 20 },// Lebar untuk 'Atasan'
+        { wch: 20 }, // Lebar untuk 'Atasan'
         { wch: 15 }, // Lebar untuk 'Jumlah Hari Simbol 1'
         { wch: 15 }, // Lebar untuk 'Jumlah Hari Simbol 2'
         { wch: 15 }, // Lebar untuk 'Jumlah Hari Simbol 3'
@@ -85,10 +93,9 @@ const ApprovalPiketList = () => {
         { wch: 18 }, // Lebar untuk 'Admin 1 Approval'
         { wch: 18 }, // Lebar untuk 'Admin 2 Approval'
         { wch: 18 }, // Lebar untuk 'Superadmin Approval'
-
       ];
 
-      ws['!cols'] = columnWidths;
+      ws["!cols"] = columnWidths;
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Rekap Lembur Keseluruhan");
       XLSX.writeFile(wb, "Rekap Piket Keseluruhan.xlsx");
@@ -99,7 +106,9 @@ const ApprovalPiketList = () => {
 
   const exportToExcelByMonth = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/export/rekap-pikets/${selectedMonth}/${selectedYear}`);
+      const response = await axios.get(
+        `http://localhost:5000/export/rekap-pikets/${selectedMonth}/${selectedYear}`
+      );
       const dataForExcel = response.data.map((item, index) => {
         // Transformasi data sesuai kebutuhan
         return {
@@ -116,17 +125,17 @@ const ApprovalPiketList = () => {
           "Jam Selesai": item.jamSelesai,
           "Bayar Piket Rutin": item.bayarPiketRutin,
           "Bayar Piket Khusus": item.bayarPiketKhusus,
-          'statusApproval': item.statusApproval,
-          'admin1Approval': item.admin1Approval,
-          'admin2Approval': item.admin2Approval,
-          'superadminApproval': item.superadminApproval,
+          statusApproval: item.statusApproval,
+          admin1Approval: item.admin1Approval,
+          admin2Approval: item.admin2Approval,
+          superadminApproval: item.superadminApproval,
         };
       });
 
       const ws = XLSX.utils.json_to_sheet(dataForExcel);
 
       const columnWidths = [
-        { wch: 5 },  // Lebar untuk kolom 'No'
+        { wch: 5 }, // Lebar untuk kolom 'No'
         { wch: 20 }, // Lebar untuk kolom 'Nama'
         { wch: 12 }, // Lebar untuk kolom 'NIP'
         { wch: 40 }, // Lebar untuk 'Jabatan'
@@ -136,7 +145,7 @@ const ApprovalPiketList = () => {
         { wch: 20 },
         { wch: 20 },
         { wch: 20 },
-        { wch: 20 },// Lebar untuk 'Atasan'
+        { wch: 20 }, // Lebar untuk 'Atasan'
         { wch: 18 }, // Lebar untuk 'Bayar Piket Rutin'
         { wch: 18 }, // Lebar untuk 'Bayar Piket Khusus'
         { wch: 18 }, // Lebar untuk 'Status Approval'
@@ -145,7 +154,7 @@ const ApprovalPiketList = () => {
         { wch: 18 }, // Lebar untuk 'Superadmin Approval'
       ];
 
-      ws['!cols'] = columnWidths;
+      ws["!cols"] = columnWidths;
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Per Bulan");
       XLSX.writeFile(wb, "Rekap Piket Keseluruhan by Month.xlsx");
@@ -160,7 +169,7 @@ const ApprovalPiketList = () => {
 
   const getApprovalPiket = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/pikets/approval');
+      const response = await axios.get("http://localhost:5000/pikets/approval");
       setPiket(response.data);
     } catch (error) {
       console.log("Error in getPikets:", error);
@@ -171,16 +180,17 @@ const ApprovalPiketList = () => {
 
   const approveAllPending = async () => {
     confirm({
-      title: 'Are you sure you want to approve all pending entries?',
-      content: 'This action will update the status of all pending entries to "Disetujui".',
+      title: "Are you sure you want to approve all pending entries?",
+      content:
+        'This action will update the status of all pending entries to "Disetujui".',
       onOk: async () => {
         try {
           // Call the new bulk approval endpoint
-          await axios.patch('http://localhost:5000/pikets/approve-all');
-  
+          await axios.patch("http://localhost:5000/pikets/approve-all");
+
           // Refresh the lembur list
           await getApprovalPiket();
-  
+
           // Show success message
           message.success("All pending approvals have been approved");
         } catch (error) {
@@ -189,7 +199,7 @@ const ApprovalPiketList = () => {
         }
       },
       onCancel() {
-        console.log('Cancel');
+        console.log("Cancel");
       },
     });
   };
@@ -218,7 +228,7 @@ const ApprovalPiketList = () => {
         statusApproval: approvalStatus,
       });
       getApprovalPiket();
-      message.success('Status updated successfully');
+      message.success("Status updated successfully");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -228,13 +238,13 @@ const ApprovalPiketList = () => {
 
   const showConfirm = (piketId, approvalStatus) => {
     confirm({
-      title: 'Do you want to update the status?',
-      content: 'This action cannot be undone',
+      title: "Do you want to update the status?",
+      content: "This action cannot be undone",
       onOk() {
         updateStatus(piketId, approvalStatus);
       },
       onCancel() {
-        console.log('Cancel');
+        console.log("Cancel");
       },
     });
   };
@@ -246,16 +256,32 @@ const ApprovalPiketList = () => {
 
   const generateColumns = () => {
     let columns = [
-      { title: 'No', dataIndex: 'index', key: 'index' },
-      { title: 'Tanggal', dataIndex: 'tanggal', key: 'tanggal' },
-      { title: 'Jam Mulai', dataIndex: 'jamMulai', key: 'jamMulai' },
-      { title: 'Jam Selesai', dataIndex: 'jamSelesai', key: 'jamSelesai' },
-      { title: 'Jenis Piket', dataIndex: 'jenisPiket', key: 'jenisPiket' },
-      { title: 'Jenis Hari', dataIndex: 'jenisHari', key: 'jenisHari' },
-      { title: 'Pekerjaan Lebih', dataIndex: 'pekerjaanLebih', key: 'pekerjaanLebih' },
-      { title: 'Status Approval', dataIndex: 'statusApproval', key: 'statusApproval' },
-      { title: 'Bayar Piket Rutin', dataIndex: 'bayarPiketRutin', key: 'bayarPiketRutin' },
-      { title: 'Bayar Piket Khusus', dataIndex: 'bayarPiketKhusus', key: 'bayarPiketKhusus' },
+      { title: "No", dataIndex: "index", key: "index" },
+      { title: "Tanggal", dataIndex: "tanggal", key: "tanggal" },
+      { title: "Jam Mulai", dataIndex: "jamMulai", key: "jamMulai" },
+      { title: "Jam Selesai", dataIndex: "jamSelesai", key: "jamSelesai" },
+      { title: "Jenis Piket", dataIndex: "jenisPiket", key: "jenisPiket" },
+      { title: "Jenis Hari", dataIndex: "jenisHari", key: "jenisHari" },
+      {
+        title: "Pekerjaan Lebih",
+        dataIndex: "pekerjaanLebih",
+        key: "pekerjaanLebih",
+      },
+      {
+        title: "Status Approval",
+        dataIndex: "statusApproval",
+        key: "statusApproval",
+      },
+      {
+        title: "Bayar Piket Rutin",
+        dataIndex: "bayarPiketRutin",
+        key: "bayarPiketRutin",
+      },
+      {
+        title: "Bayar Piket Khusus",
+        dataIndex: "bayarPiketKhusus",
+        key: "bayarPiketKhusus",
+      },
       {
         title: "Bukti Piket",
         dataIndex: "buktiPiket",
@@ -273,15 +299,18 @@ const ApprovalPiketList = () => {
       },
     ];
 
-
     if (user && user.role) {
-      if (user.role === 'admin1') {
+      if (user.role === "admin1") {
         columns = [
           ...columns,
-          { title: 'Name', dataIndex: 'name', key: 'name' },
-          { title: 'Jabatan', dataIndex: 'jabatan', key: 'jabatan' },
-          { title: 'Grade', dataIndex: 'grade', key: 'grade' },
-          { title: 'Admin1 Approval', dataIndex: 'admin1Approval', key: 'admin1Approval' },
+          { title: "Name", dataIndex: "name", key: "name" },
+          { title: "Jabatan", dataIndex: "jabatan", key: "jabatan" },
+          { title: "Grade", dataIndex: "grade", key: "grade" },
+          {
+            title: "Admin1 Approval",
+            dataIndex: "admin1Approval",
+            key: "admin1Approval",
+          },
           {
             title: (
               <div>
@@ -301,92 +330,222 @@ const ApprovalPiketList = () => {
                 </Button>
               </div>
             ),
-            dataIndex: 'actions', key: 'actions', render: (_, record) => (
+            dataIndex: "actions",
+            key: "actions",
+            render: (_, record) => (
               <Space>
-                {record.admin1Approval !== 'Disetujui' && record.admin1Approval !== 'Ditolak' && (
-                  <Link to={`/approval/approvalpiket/edit/${record.key}`}>
-                    <Button type="primary" style={{ fontSize: "12px" }}>
-                      Edit
-                    </Button>
-                  </Link>
-                )}
-                {record.admin1Approval !== 'Ditolak' && (
-                  <Button type="primary" disabled={record.admin1Approval === 'Disetujui'} onClick={() => { showConfirm(record.key, 'Disetujui'); record.admin1Approval = 'Disetujui'; }} style={{ backgroundColor: '#04AA6D', borderColor: '#04AA6D', color: 'white', fontSize: "12px" }}>
+                {record.admin1Approval !== "Disetujui" &&
+                  record.admin1Approval !== "Ditolak" && (
+                    <Link to={`/approval/approvalpiket/edit/${record.key}`}>
+                      <Button type="primary" style={{ fontSize: "12px" }}>
+                        Edit
+                      </Button>
+                    </Link>
+                  )}
+                {record.admin1Approval !== "Ditolak" && (
+                  <Button
+                    type="primary"
+                    disabled={record.admin1Approval === "Disetujui"}
+                    onClick={() => {
+                      showConfirm(record.key, "Disetujui");
+                      record.admin1Approval = "Disetujui";
+                    }}
+                    style={{
+                      backgroundColor: "#04AA6D",
+                      borderColor: "#04AA6D",
+                      color: "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     Setujui
                   </Button>
                 )}
-                {record.admin1Approval !== 'Disetujui' && (
-                  <Button type="danger" disabled={record.admin1Approval === 'Ditolak'} onClick={() => { showConfirm(record.key, 'Ditolak'); record.admin1Approval = 'Ditolak'; }} style={{ backgroundColor: '#f5222d', borderColor: '#f5222d', color: 'white', fontSize: "12px" }}>
+                {record.admin1Approval !== "Disetujui" && (
+                  <Button
+                    type="danger"
+                    disabled={record.admin1Approval === "Ditolak"}
+                    onClick={() => {
+                      showConfirm(record.key, "Ditolak");
+                      record.admin1Approval = "Ditolak";
+                    }}
+                    style={{
+                      backgroundColor: "#f5222d",
+                      borderColor: "#f5222d",
+                      color: "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     Tolak
                   </Button>
                 )}
               </Space>
-            )
+            ),
           },
         ];
-      } else if (user.role === 'admin2') {
+      } else if (user.role === "admin2") {
         columns = [
           ...columns,
-          { title: 'Name', dataIndex: 'name', key: 'name' },
-          { title: 'NIP', dataIndex: 'nip', key: 'nip' },
-          { title: 'Jabatan', dataIndex: 'jabatan', key: 'jabatan' },
-          { title: 'Grade', dataIndex: 'grade', key: 'grade' },
-          { title: 'Atasan', dataIndex: 'atasan', key: 'atasan' },
-          { title: 'Admin1 Approval', dataIndex: 'admin1Approval', key: 'admin1Approval' },
-          { title: 'Admin2 Approval', dataIndex: 'admin2Approval', key: 'admin2Approval' },
+          { title: "Name", dataIndex: "name", key: "name" },
+          { title: "NIP", dataIndex: "nip", key: "nip" },
+          { title: "Jabatan", dataIndex: "jabatan", key: "jabatan" },
+          { title: "Grade", dataIndex: "grade", key: "grade" },
+          { title: "Atasan", dataIndex: "atasan", key: "atasan" },
           {
-            title: 'Actions', dataIndex: 'actions', key: 'actions', render: (_, record) => (
+            title: "Admin1 Approval",
+            dataIndex: "admin1Approval",
+            key: "admin1Approval",
+          },
+          {
+            title: "Admin2 Approval",
+            dataIndex: "admin2Approval",
+            key: "admin2Approval",
+          },
+          {
+            title: (
+              <div>
+                Actions
+                <Button
+                  type="primary"
+                  onClick={approveAllPending}
+                  style={{
+                    marginLeft: "10px",
+                    backgroundColor: "#04AA6D",
+                    borderColor: "#04AA6D",
+                    color: "white",
+                    fontSize: "12px",
+                  }}
+                >
+                  Setujui Semua
+                </Button>
+              </div>
+            ),
+            dataIndex: "actions",
+            key: "actions",
+            render: (_, record) => (
               <Space>
-                {record.atasan === 'Hariady Bayu Aji' && record.admin2Approval !== 'Disetujui' && record.admin2Approval !== 'Ditolak' && (
-                  <Link to={`/approval/approvalpiket/edit/${record.key}`}>
-                    <Button type='primary' style={{ fontSize: "12px" }}>
-                      Edit
-                    </Button>
-                  </Link>
-                )}
-                {record.admin2Approval !== 'Ditolak' && (
-                  <Button type="primary" disabled={record.admin2Approval === 'Disetujui'} onClick={() => { showConfirm(record.key, 'Disetujui'); record.admin2Approval = 'Disetujui'; }} style={{ backgroundColor: '#04AA6D', borderColor: '#04AA6D', color: 'white', fontSize: "12px" }}>
+                {record.atasan === "Hariady Bayu Aji" &&
+                  record.admin2Approval !== "Disetujui" &&
+                  record.admin2Approval !== "Ditolak" && (
+                    <Link to={`/approval/approvalpiket/edit/${record.key}`}>
+                      <Button type="primary" style={{ fontSize: "12px" }}>
+                        Edit
+                      </Button>
+                    </Link>
+                  )}
+                {record.admin2Approval !== "Ditolak" && (
+                  <Button
+                    type="primary"
+                    disabled={record.admin2Approval === "Disetujui"}
+                    onClick={() => {
+                      showConfirm(record.key, "Disetujui");
+                      record.admin2Approval = "Disetujui";
+                    }}
+                    style={{
+                      backgroundColor: "#04AA6D",
+                      borderColor: "#04AA6D",
+                      color: "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     Setujui
                   </Button>
                 )}
-                {record.admin2Approval !== 'Disetujui' && (
-                  <Button type="danger" disabled={record.admin2Approval === 'Ditolak'} onClick={() => { showConfirm(record.key, 'Ditolak'); record.admin2Approval = 'Ditolak'; }} style={{ backgroundColor: '#f5222d', borderColor: '#f5222d', color: 'white', fontSize: "12px" }}>
+                {record.admin2Approval !== "Disetujui" && (
+                  <Button
+                    type="danger"
+                    disabled={record.admin2Approval === "Ditolak"}
+                    onClick={() => {
+                      showConfirm(record.key, "Ditolak");
+                      record.admin2Approval = "Ditolak";
+                    }}
+                    style={{
+                      backgroundColor: "#f5222d",
+                      borderColor: "#f5222d",
+                      color: "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     Tolak
                   </Button>
                 )}
               </Space>
-            )
+            ),
           },
         ];
-      } else if (user.role === 'superadmin') {
+      } else if (user.role === "superadmin") {
         columns = [
           ...columns,
-          { title: 'Name', dataIndex: 'name', key: 'name' },
-          { title: 'NIP', dataIndex: 'nip', key: 'nip' },
-          { title: 'Jabatan', dataIndex: 'jabatan', key: 'jabatan' },
-          { title: 'Grade', dataIndex: 'grade', key: 'grade' },
-          { title: 'Atasan', dataIndex: 'atasan', key: 'atasan' },
-          { title: 'Admin1 Approval', dataIndex: 'admin1Approval', key: 'admin1Approval' },
-          { title: 'Admin2 Approval', dataIndex: 'admin2Approval', key: 'admin2Approval' },
-          { title: 'Superadmin Approval', dataIndex: 'superadminApproval', key: 'superadminApproval' },
+          { title: "Name", dataIndex: "name", key: "name" },
+          { title: "NIP", dataIndex: "nip", key: "nip" },
+          { title: "Jabatan", dataIndex: "jabatan", key: "jabatan" },
+          { title: "Grade", dataIndex: "grade", key: "grade" },
+          { title: "Atasan", dataIndex: "atasan", key: "atasan" },
           {
-            title: 'Actions', dataIndex: 'actions', key: 'actions', render: (_, record) => (
+            title: "Admin1 Approval",
+            dataIndex: "admin1Approval",
+            key: "admin1Approval",
+          },
+          {
+            title: "Admin2 Approval",
+            dataIndex: "admin2Approval",
+            key: "admin2Approval",
+          },
+          {
+            title: "Superadmin Approval",
+            dataIndex: "superadminApproval",
+            key: "superadminApproval",
+          },
+          {
+            title: "Actions",
+            dataIndex: "actions",
+            key: "actions",
+            render: (_, record) => (
               <Space>
-                {record.superadminApproval !== 'Ditolak' && (
-                  <Button type="primary" disabled={record.superadminApproval === 'Disetujui'} onClick={() => { showConfirm(record.key, 'Disetujui'); record.superadminApproval = 'Disetujui'; }} style={{ backgroundColor: '#04AA6D', borderColor: '#04AA6D', color: 'white', fontSize: "12px" }}>
+                {record.superadminApproval !== "Ditolak" && (
+                  <Button
+                    type="primary"
+                    disabled={record.superadminApproval === "Disetujui"}
+                    onClick={() => {
+                      showConfirm(record.key, "Disetujui");
+                      record.superadminApproval = "Disetujui";
+                    }}
+                    style={{
+                      backgroundColor: "#04AA6D",
+                      borderColor: "#04AA6D",
+                      color: "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     Setujui
                   </Button>
                 )}
-                {record.superadminApproval !== 'Disetujui' && (
-                  <Button type="danger" disabled={record.superadminApproval === 'Ditolak'} onClick={() => { showConfirm(record.key, 'Ditolak'); record.superadminApproval = 'Ditolak'; }} style={{ backgroundColor: '#f5222d', borderColor: '#f5222d', color: 'white', fontSize: "12px" }}>
+                {record.superadminApproval !== "Disetujui" && (
+                  <Button
+                    type="danger"
+                    disabled={record.superadminApproval === "Ditolak"}
+                    onClick={() => {
+                      showConfirm(record.key, "Ditolak");
+                      record.superadminApproval = "Ditolak";
+                    }}
+                    style={{
+                      backgroundColor: "#f5222d",
+                      borderColor: "#f5222d",
+                      color: "white",
+                      fontSize: "12px",
+                    }}
+                  >
                     Tolak
                   </Button>
                 )}
-                <Button type="danger" onClick={() => deletePiket(record.key)} style={{ fontSize: "12px" }}>
+                <Button
+                  type="danger"
+                  onClick={() => deletePiket(record.key)}
+                  style={{ fontSize: "12px" }}
+                >
                   Delete
                 </Button>
               </Space>
-            )
+            ),
           },
         ];
       }
@@ -398,10 +557,17 @@ const ApprovalPiketList = () => {
   const columns = generateColumns();
 
   const formatDate = (dateStr) => {
-    const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
     const date = new Date(dateStr);
-    const formattedDate = date.toLocaleDateString('id-ID', options);
-    return `${formattedDate.split(',')[0]} / ${formattedDate.split(',')[1].trim()}`;
+    const formattedDate = date.toLocaleDateString("id-ID", options);
+    return `${formattedDate.split(",")[0]} / ${formattedDate
+      .split(",")[1]
+      .trim()}`;
   };
 
   const data = pikets.map((piket, index) => {
@@ -427,7 +593,6 @@ const ApprovalPiketList = () => {
       admin2Approval: piket.admin2Approval,
       superadminApproval: piket.superadminApproval,
       buktiPiket: piket.buktiPiket,
-
     };
 
     return rowData;
@@ -470,7 +635,11 @@ const ApprovalPiketList = () => {
     const filterYearNumber = filterYear ? parseInt(filterYear, 10) : null;
 
     if (filterMonth && filterYear && filterStatus) {
-      return piketMonth === filterMonthNumber && piketYear === filterYearNumber && piket.statusApproval === filterStatus;
+      return (
+        piketMonth === filterMonthNumber &&
+        piketYear === filterYearNumber &&
+        piket.statusApproval === filterStatus
+      );
     } else if (filterMonth && filterYear) {
       return piketMonth === filterMonthNumber && piketYear === filterYearNumber;
     } else if (filterMonth) {
@@ -483,7 +652,6 @@ const ApprovalPiketList = () => {
 
     return true;
   });
-
 
   return (
     <div className="container">
@@ -527,6 +695,12 @@ const ApprovalPiketList = () => {
                     <Option value="">Semua</Option>
                     <Option value="2023">2023</Option>
                     <Option value="2024">2024</Option>
+                    <Option value="2025">2025</Option>
+                    <Option value="2026">2026</Option>
+                    <Option value="2027">2027</Option>
+                    <Option value="2028">2028</Option>
+                    <Option value="2029">2029</Option>
+                    <Option value="2030">2030</Option>
                   </Select>
                 </Form.Item>
               </Form>
@@ -599,6 +773,12 @@ const ApprovalPiketList = () => {
                         >
                           <Option value="2023">2023</Option>
                           <Option value="2024">2024</Option>
+                          <Option value="2025">2025</Option>
+                          <Option value="2026">2026</Option>
+                          <Option value="2027">2027</Option>
+                          <Option value="2028">2028</Option>
+                          <Option value="2029">2029</Option>
+                          <Option value="2030">2030</Option>
                         </Select>
                       </Form.Item>
                     </Form>
@@ -682,7 +862,6 @@ const ApprovalPiketList = () => {
       />
     </div>
   );
-
 };
 
 export default ApprovalPiketList;

@@ -179,16 +179,17 @@ const ApprovalPremiList = () => {
 
   const approveAllPending = async () => {
     confirm({
-      title: 'Are you sure you want to approve all pending entries?',
-      content: 'This action will update the status of all pending entries to "Disetujui".',
+      title: "Are you sure you want to approve all pending entries?",
+      content:
+        'This action will update the status of all pending entries to "Disetujui".',
       onOk: async () => {
         try {
           // Call the new bulk approval endpoint
-          await axios.patch('http://localhost:5000/premis/approve-all');
-  
+          await axios.patch("http://localhost:5000/premis/approve-all");
+
           // Refresh the lembur list
           await getApprovalPremi();
-  
+
           // Show success message
           message.success("All pending approvals have been approved");
         } catch (error) {
@@ -197,7 +198,7 @@ const ApprovalPremiList = () => {
         }
       },
       onCancel() {
-        console.log('Cancel');
+        console.log("Cancel");
       },
     });
   };
@@ -372,7 +373,24 @@ const ApprovalPremiList = () => {
             key: "admin2Approval",
           },
           {
-            title: "Actions",
+            title: (
+              <div>
+                Actions
+                <Button
+                  type="primary"
+                  onClick={approveAllPending}
+                  style={{
+                    marginLeft: "10px",
+                    backgroundColor: "#04AA6D",
+                    borderColor: "#04AA6D",
+                    color: "white",
+                    fontSize: "12px",
+                  }}
+                >
+                  Setujui Semua
+                </Button>
+              </div>
+            ),
             dataIndex: "actions",
             key: "actions",
             render: (_, record) => (
@@ -646,6 +664,12 @@ const ApprovalPremiList = () => {
                     <Option value="">Semua</Option>
                     <Option value="2023">2023</Option>
                     <Option value="2024">2024</Option>
+                    <Option value="2025">2025</Option>
+                    <Option value="2026">2026</Option>
+                    <Option value="2027">2027</Option>
+                    <Option value="2028">2028</Option>
+                    <Option value="2029">2029</Option>
+                    <Option value="2030">2030</Option>
                   </Select>
                 </Form.Item>
               </Form>
@@ -718,6 +742,12 @@ const ApprovalPremiList = () => {
                         >
                           <Option value="2023">2023</Option>
                           <Option value="2024">2024</Option>
+                          <Option value="2025">2025</Option>
+                          <Option value="2026">2026</Option>
+                          <Option value="2027">2027</Option>
+                          <Option value="2028">2028</Option>
+                          <Option value="2029">2029</Option>
+                          <Option value="2030">2030</Option>
                         </Select>
                       </Form.Item>
                     </Form>

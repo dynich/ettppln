@@ -488,25 +488,36 @@ export const getPiketById = async (req, res) => {
 export const approveAllPending = async (req, res) => {
   try {
     // Check if the user is admin1
-    if (req.role !== "admin1") {
+    if (req.role !== "admin1" && req.role !== "admin2") {
       return res.status(403).json({ msg: "Akses terlarang" });
     }
 
     // Fetch all pending pikets
+    const whereCondition =
+      req.role === "admin1"
+        ? { admin1Approval: { [Op.ne]: "Disetujui" } }
+        : {
+            admin1Approval: "Disetujui",
+            admin2Approval: { [Op.ne]: "Disetujui" },
+          };
+
     const pendingPikets = await Pikets.findAll({
-      where: {
-        admin1Approval: {
-          [Op.ne]: "Disetujui",
-        },
-      },
+      where: whereCondition,
     });
 
     // Update each pending lembur to "Disetujui"
     for (const piket of pendingPikets) {
-      await Pikets.update(
-        { admin1Approval: "Disetujui" },
-        { where: { uuid: piket.uuid } }
-      );
+      if (req.role === "admin1") {
+        await Pikets.update(
+          { admin1Approval: "Disetujui" },
+          { where: { uuid: piket.uuid } }
+        );
+      } else if (req.role === "admin2") {
+        await Pikets.update(
+          { admin2Approval: "Disetujui" },
+          { where: { uuid: piket.uuid } }
+        );
+      }
     }
 
     res.status(200).json({ msg: "All pending approvals have been approved" });

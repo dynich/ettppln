@@ -492,25 +492,36 @@ export const getLemburById = async (req, res) => {
 export const approveAllPending = async (req, res) => {
   try {
     // Check if the user is admin1
-    if (req.role !== "admin1") {
+    if (req.role !== "admin1" && req.role !== "admin2") {
       return res.status(403).json({ msg: "Akses terlarang" });
     }
 
     // Fetch all pending lemburs
+    const whereCondition =
+      req.role === "admin1"
+        ? { admin1Approval: { [Op.ne]: "Disetujui" } }
+        : {
+            admin1Approval: "Disetujui",
+            admin2Approval: { [Op.ne]: "Disetujui" },
+          };
+
     const pendingLemburs = await Lemburs.findAll({
-      where: {
-        admin1Approval: {
-          [Op.ne]: "Disetujui",
-        },
-      },
+      where: whereCondition,
     });
 
     // Update each pending lembur to "Disetujui"
     for (const lembur of pendingLemburs) {
-      await Lemburs.update(
-        { admin1Approval: "Disetujui" },
-        { where: { uuid: lembur.uuid } }
-      );
+      if (req.role === "admin1") {
+        await Lemburs.update(
+          { admin1Approval: "Disetujui" },
+          { where: { uuid: lembur.uuid } }
+        );
+      } else if (req.role === "admin2") {
+        await Lemburs.update(
+          { admin2Approval: "Disetujui" },
+          { where: { uuid: lembur.uuid } }
+        );
+      }
     }
 
     res.status(200).json({ msg: "All pending approvals have been approved" });

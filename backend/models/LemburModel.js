@@ -16,7 +16,7 @@ const Lemburs = db.define(
       },
     },
     tanggal: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATEONLY, 
       allowNull: false,
       validate: {
         notEmpty: true,

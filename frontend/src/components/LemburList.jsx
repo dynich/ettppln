@@ -32,6 +32,7 @@ const LemburList = () => {
   const [filterMonth, setFilterMonth] = useState("");
   const [filterYear, setFilterYear] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
+  const [isFileValid, setIsFileValid] = useState(true);
   const [users, setUsers] = useState([]);
 
   const handleFileChange = (e) => {
@@ -40,25 +41,32 @@ const LemburList = () => {
       const maxSize = 1000000; // 1MB in bytes
       if (file.size > maxSize) {
         message.error("Max file size is 1MB.");
+        setIsFileValid(false);
         return;
+      } else {
+        setIsFileValid(true);
       }
       setBuktiLembur(file);
     }
   };
 
-  
   useEffect(() => {
-    axios.get("http://localhost:5000/users").then((response) => {
-      setUsers(response.data);
-    }).catch((error) => {
-      console.error("Error in getUsers:", error);
-    });
+    // Lakukan permintaan HTTP untuk mengambil data pengguna dari server
+    axios
+      .get("http://localhost:5000/users")
+      .then((response) => {
+        // Jika permintaan berhasil, simpan data pengguna dalam state users
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error in getUsers:", error);
+      });
   }, []);
-  
+
   useEffect(() => {
     getLemburs();
   }, []);
-  
+
   const getLemburs = async () => {
     try {
       const response = await axios.get("http://localhost:5000/lemburs");
@@ -67,7 +75,7 @@ const LemburList = () => {
       console.log("Error in getLemburs:", error);
     }
   };
-  
+
   const submitLembur = (e) => {
     e.preventDefault();
     Modal.confirm({
@@ -83,11 +91,11 @@ const LemburList = () => {
           formData.append("jenisHari", jenisHari);
           formData.append("pekerjaanLebih", pekerjaanLebih);
           formData.append("buktiLembur", buktiLembur);
-  
+
           await axios.post("http://localhost:5000/lemburs", formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
-  
+
           setTanggal("");
           setJamMulai("");
           setJamSelesai("");
@@ -103,7 +111,7 @@ const LemburList = () => {
         }
       },
     });
-  };  
+  };
 
   const columns = [
     { title: "No", dataIndex: "index", key: "index" },
@@ -170,8 +178,7 @@ const LemburList = () => {
     const formattedDate = date.toLocaleDateString("id-ID", options);
     return `${formattedDate.split(",")[0]} / ${formattedDate
       .split(",")[1]
-      // .trim()
-    }`;
+      .trim()}`;
   };
 
   const data = lemburs.map((lembur, index) => {
@@ -300,11 +307,16 @@ const LemburList = () => {
         ttdCanvas.width = ttdManager.width;
         ttdCanvas.height = ttdManager.height;
         const ttdContext = ttdCanvas.getContext("2d");
-        ttdContext.drawImage(ttdManager, 0, 0, ttdManager.width, ttdManager.height);
+        ttdContext.drawImage(
+          ttdManager,
+          0,
+          0,
+          ttdManager.width,
+          ttdManager.height
+        );
         const ttdDataUrl = ttdCanvas.toDataURL("image/png");
         pdf.addImage(ttdDataUrl, "PNG", 20, 177, 50, 13); // Atur posisi dan ukuran gambar tanda tangan sesuai kebutuhan
 
-        
         const stempel = new Image();
         stempel.src = "/stempel_UBPTello.png"; // Ganti dengan path gambar tanda tangan Anda
         img.crossOrigin = "Anonymous";
@@ -313,23 +325,34 @@ const LemburList = () => {
           stempelCanvas.width = stempel.width;
           stempelCanvas.height = stempel.height;
           const stempelContext = stempelCanvas.getContext("2d");
-          stempelContext.drawImage(stempel, 0, 0, stempel.width, stempel.height);
+          stempelContext.drawImage(
+            stempel,
+            0,
+            0,
+            stempel.width,
+            stempel.height
+          );
           const stempelDataUrl = stempelCanvas.toDataURL("image/png");
           pdf.addImage(stempelDataUrl, "PNG", 10, 164, 40, 40); // Atur posisi dan ukuran gambar tanda tangan sesuai kebutuhan
 
-        const ttdAtasan = new Image();
-        const atasanFileName = atasanName.replace(/ /g, "_").toUpperCase(); // Mengubah spasi menjadi underscore dan ke huruf kapital
-        ttdAtasan.src = `/ttd_Atasan/${atasanFileName}.png`; // Path gambar tanda tangan dinamis berdasarkan nama atasan
-        img.crossOrigin = "Anonymous";
+          const ttdAtasan = new Image();
+          const atasanFileName = atasanName.replace(/ /g, "_").toUpperCase(); // Mengubah spasi menjadi underscore dan ke huruf kapital
+          ttdAtasan.src = `/ttd_Atasan/${atasanFileName}.png`; // Path gambar tanda tangan dinamis berdasarkan nama atasan
+          img.crossOrigin = "Anonymous";
           ttdAtasan.onload = function () {
             const ttdCanvas = document.createElement("canvas");
             ttdCanvas.width = ttdAtasan.width;
             ttdCanvas.height = ttdAtasan.height;
             const ttdContext = ttdCanvas.getContext("2d");
-            ttdContext.drawImage(ttdAtasan, 0, 0, ttdAtasan.width, ttdAtasan.height);
+            ttdContext.drawImage(
+              ttdAtasan,
+              0,
+              0,
+              ttdAtasan.width,
+              ttdAtasan.height
+            );
             const ttdDataUrl = ttdCanvas.toDataURL("image/png");
             pdf.addImage(ttdDataUrl, "PNG", 120, 160, 40, 30); // Atur posisi dan ukuran gambar tanda tangan sesuai kebutuhan
-
 
             pdf.setLineWidth(0.5);
             pdf.line(20, 190, 80, 190);
@@ -457,7 +480,7 @@ const LemburList = () => {
                   </div>
                 </Space>
                 <div style={{ paddingLeft: "30px" }}>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" disabled={!isFileValid}>
                     Ajukan Lembur
                   </Button>
                 </div>
@@ -485,7 +508,7 @@ const LemburList = () => {
                   <label>Bukti Lembur</label>
                   <Input
                     type="file"
-                    // value={buktiLembur}
+                    accept="image/*"
                     onChange={handleFileChange}
                     required
                   />
@@ -527,6 +550,12 @@ const LemburList = () => {
                 <Option value="">Semua</Option>
                 <Option value="2023">2023</Option>
                 <Option value="2024">2024</Option>
+                <Option value="2024">2025</Option>
+                <Option value="2024">2026</Option>
+                <Option value="2024">2027</Option>
+                <Option value="2024">2028</Option>
+                <Option value="2024">2029</Option>
+                <Option value="2024">2030</Option>
               </Select>
             </Space>
           </Col>

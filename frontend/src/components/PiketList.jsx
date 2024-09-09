@@ -31,6 +31,7 @@ const PiketList = () => {
   const [filterMonth, setFilterMonth] = useState("");
   const [filterYear, setFilterYear] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
+  const [isFileValid, setIsFileValid] = useState(true);
   const [users, setUsers] = useState([]);
 
   const handleFileChange = (e) => {
@@ -39,7 +40,10 @@ const PiketList = () => {
       const maxSize = 1000000; // 1MB in bytes
       if (file.size > maxSize) {
         message.error("Max file size is 1MB.");
+        setIsFileValid(false);
         return;
+      } else {
+        setIsFileValid(true);
       }
       setBuktiPiket(file);
     }
@@ -311,7 +315,13 @@ const PiketList = () => {
         ttdCanvas.width = ttdManager.width;
         ttdCanvas.height = ttdManager.height;
         const ttdContext = ttdCanvas.getContext("2d");
-        ttdContext.drawImage(ttdManager, 0, 0, ttdManager.width, ttdManager.height);
+        ttdContext.drawImage(
+          ttdManager,
+          0,
+          0,
+          ttdManager.width,
+          ttdManager.height
+        );
         const ttdDataUrl = ttdCanvas.toDataURL("image/png");
         pdf.addImage(ttdDataUrl, "PNG", 20, 177, 50, 13); // Atur posisi dan ukuran gambar tanda tangan sesuai kebutuhan
 
@@ -323,23 +333,34 @@ const PiketList = () => {
           stempelCanvas.width = stempel.width;
           stempelCanvas.height = stempel.height;
           const stempelContext = stempelCanvas.getContext("2d");
-          stempelContext.drawImage(stempel, 0, 0, stempel.width, stempel.height);
+          stempelContext.drawImage(
+            stempel,
+            0,
+            0,
+            stempel.width,
+            stempel.height
+          );
           const stempelDataUrl = stempelCanvas.toDataURL("image/png");
           pdf.addImage(stempelDataUrl, "PNG", 10, 164, 40, 40); // Atur posisi dan ukuran gambar tanda tangan sesuai kebutuhan
 
-        const ttdAtasan = new Image();
-        const atasanFileName = atasanName.replace(/ /g, "_").toUpperCase(); // Mengubah spasi menjadi underscore dan ke huruf kapital
-        ttdAtasan.src = `/ttd_Atasan/${atasanFileName}.png`; // Path gambar tanda tangan dinamis berdasarkan nama atasan
-        img.crossOrigin = "Anonymous";
+          const ttdAtasan = new Image();
+          const atasanFileName = atasanName.replace(/ /g, "_").toUpperCase(); // Mengubah spasi menjadi underscore dan ke huruf kapital
+          ttdAtasan.src = `/ttd_Atasan/${atasanFileName}.png`; // Path gambar tanda tangan dinamis berdasarkan nama atasan
+          img.crossOrigin = "Anonymous";
           ttdAtasan.onload = function () {
             const ttdCanvas = document.createElement("canvas");
             ttdCanvas.width = ttdAtasan.width;
             ttdCanvas.height = ttdAtasan.height;
             const ttdContext = ttdCanvas.getContext("2d");
-            ttdContext.drawImage(ttdAtasan, 0, 0, ttdAtasan.width, ttdAtasan.height);
+            ttdContext.drawImage(
+              ttdAtasan,
+              0,
+              0,
+              ttdAtasan.width,
+              ttdAtasan.height
+            );
             const ttdDataUrl = ttdCanvas.toDataURL("image/png");
             pdf.addImage(ttdDataUrl, "PNG", 120, 160, 40, 30); // Atur posisi dan ukuran gambar tanda tangan sesuai kebutuhan
-
 
             pdf.setLineWidth(0.5);
             pdf.line(20, 190, 80, 190);
@@ -462,17 +483,22 @@ const PiketList = () => {
                   </div>
                 </Space>
                 <Space style={{ marginBottom: "10px", display: "block" }}>
-                <label className="text_label">Bukti Piket</label>
+                  <label className="text_label">Bukti Piket</label>
                   <div style={{ paddingLeft: "30px" }}>
-                  <Input
-                    type="file"
-                    onChange={handleFileChange}
-                    required
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      required
                     />
-                    </div>
+                  </div>
                 </Space>
-                <div style={{ paddingLeft: "30px", paddingTop: "5px"}}>
-                  <Button type="primary" htmlType="submit">
+                <div style={{ paddingLeft: "30px", paddingTop: "5px" }}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    disabled={!isFileValid}
+                  >
                     Ajukan Piket
                   </Button>
                 </div>

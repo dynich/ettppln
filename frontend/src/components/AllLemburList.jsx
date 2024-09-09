@@ -60,7 +60,7 @@ const LemburList = () => {
         { wch: 40 }, // Lebar untuk 'Jabatan'
         { wch: 10 }, // Lebar untuk 'Grade'
         { wch: 20 }, // Lebar untuk 'Atasan'
-        { wch: 15 }, //Lebar untuk Tanggal,
+        { wch: 15 }, // Lebar untuk Tanggal,
         { wch: 15 },
         { wch: 15 },
         { wch: 15 },
@@ -259,6 +259,12 @@ const LemburList = () => {
                     <Option value="">Semua</Option>
                     <Option value="2023">2023</Option>
                     <Option value="2024">2024</Option>
+                    <Option value="2025">2025</Option>
+                    <Option value="2026">2026</Option>
+                    <Option value="2027">2027</Option>
+                    <Option value="2028">2028</Option>
+                    <Option value="2029">2029</Option>
+                    <Option value="2030">2030</Option>
                   </Select>
                 </Form.Item>
               </Form>
@@ -331,6 +337,12 @@ const LemburList = () => {
                         >
                           <Option value="2023">2023</Option>
                           <Option value="2024">2024</Option>
+                          <Option value="2025">2025</Option>
+                          <Option value="2026">2026</Option>
+                          <Option value="2027">2027</Option>
+                          <Option value="2028">2028</Option>
+                          <Option value="2029">2029</Option>
+                          <Option value="2030">2030</Option>
                         </Select>
                       </Form.Item>
                     </Form>

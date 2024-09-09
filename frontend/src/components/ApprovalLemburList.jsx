@@ -170,7 +170,6 @@ const ApprovalLemburList = () => {
     }
   };
 
-
   useEffect(() => {
     getApprovalLembur();
   }, []);
@@ -190,16 +189,17 @@ const ApprovalLemburList = () => {
 
   const approveAllPending = async () => {
     confirm({
-      title: 'Are you sure you want to approve all pending entries?',
-      content: 'This action will update the status of all pending entries to "Disetujui".',
+      title: "Are you sure you want to approve all pending entries?",
+      content:
+        'This action will update the status of all pending entries to "Disetujui".',
       onOk: async () => {
         try {
           // Call the new bulk approval endpoint
-          await axios.patch('http://localhost:5000/lemburs/approve-all');
-  
+          await axios.patch("http://localhost:5000/lemburs/approve-all");
+
           // Refresh the lembur list
           await getApprovalLembur();
-  
+
           // Show success message
           message.success("All pending approvals have been approved");
         } catch (error) {
@@ -208,7 +208,7 @@ const ApprovalLemburList = () => {
         }
       },
       onCancel() {
-        console.log('Cancel');
+        console.log("Cancel");
       },
     });
   };
@@ -230,7 +230,6 @@ const ApprovalLemburList = () => {
       getLemburById();
     }
   }, [id]);
-
 
   const updateStatus = async (lemburId, approvalStatus) => {
     try {
@@ -272,8 +271,16 @@ const ApprovalLemburList = () => {
       { title: "Jam Mulai", dataIndex: "jamMulai", key: "jamMulai" },
       { title: "Jam Selesai", dataIndex: "jamSelesai", key: "jamSelesai" },
       { title: "Jenis Hari", dataIndex: "jenisHari", key: "jenisHari" },
-      { title: "Pekerjaan Lebih", dataIndex: "pekerjaanLebih", key: "pekerjaanLebih"},
-      { title: "Status Approval", dataIndex: "statusApproval", key: "statusApproval"},
+      {
+        title: "Pekerjaan Lebih",
+        dataIndex: "pekerjaanLebih",
+        key: "pekerjaanLebih",
+      },
+      {
+        title: "Status Approval",
+        dataIndex: "statusApproval",
+        key: "statusApproval",
+      },
       { title: "Bayar TTP2", dataIndex: "bayarTTP2", key: "bayarTTP2" },
       {
         title: "Bukti Lembur",
@@ -393,7 +400,24 @@ const ApprovalLemburList = () => {
             key: "admin2Approval",
           },
           {
-            title: "Actions",
+            title: (
+              <div>
+                Actions
+                <Button
+                  type="primary"
+                  onClick={approveAllPending}
+                  style={{
+                    marginLeft: "10px",
+                    backgroundColor: "#04AA6D",
+                    borderColor: "#04AA6D",
+                    color: "white",
+                    fontSize: "12px",
+                  }}
+                >
+                  Setujui Semua
+                </Button>
+              </div>
+            ),
             dataIndex: "actions",
             key: "actions",
             render: (_, record) => (
@@ -540,8 +564,8 @@ const ApprovalLemburList = () => {
     };
     const date = new Date(dateStr);
     const formattedDate = date.toLocaleDateString("id-ID", options);
-    return `${formattedDate.split(",")[0]} / ${formattedDate
-      .split(",")[1]
+    return `${formattedDate.split(",")[0]} / ${
+      formattedDate.split(",")[1]
       // .trim()
     }`;
   };
@@ -671,6 +695,12 @@ const ApprovalLemburList = () => {
                     <Option value="">Semua</Option>
                     <Option value="2023">2023</Option>
                     <Option value="2024">2024</Option>
+                    <Option value="2025">2025</Option>
+                    <Option value="2026">2026</Option>
+                    <Option value="2027">2027</Option>
+                    <Option value="2028">2028</Option>
+                    <Option value="2029">2029</Option>
+                    <Option value="2030">2030</Option>
                   </Select>
                 </Form.Item>
               </Form>
@@ -743,6 +773,12 @@ const ApprovalLemburList = () => {
                         >
                           <Option value="2023">2023</Option>
                           <Option value="2024">2024</Option>
+                          <Option value="2025">2025</Option>
+                          <Option value="2026">2026</Option>
+                          <Option value="2027">2027</Option>
+                          <Option value="2028">2028</Option>
+                          <Option value="2029">2029</Option>
+                          <Option value="2030">2030</Option>
                         </Select>
                       </Form.Item>
                     </Form>
